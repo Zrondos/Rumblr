@@ -14,15 +14,19 @@ a{
 </style>
 <body>
     <nav>
-        <a href="/">Home</a> 
-        <a href="/sign_up">Sign Up</a>
-        <a href="/sign_in">Sign In</a>
-        <a href="/account_settings">Account Settings</a>
-        <a href="/all_posts">All Posts</a>
-        <a href="/create_post">Create Post</a>
-        <a href="/users_posts">Profile</a>
-        <a href="/search_by_hashtags">Search By Hashtags</a>
-        <a href="/posts_by_hashtags">Posts By Hashtags</a>  
+        <a href="/">Home</a>
+        <% if session[:user_id] %>
+            <a href="/account_settings">Account Settings</a>
+            <a href="/all_posts">All Posts</a>
+            <a href="/create_post">Create Post</a>
+            <a href="/users_posts">Profile</a>
+            <a href="/search_by_hashtags">Search By Hashtags</a>
+            <a href="/posts_by_hashtags">Posts By Hashtags</a> 
+            <a href="/logout">Logout</a>
+        <%else%>
+            <a href="/sign_up">Sign Up</a>
+            <a href="/sign_in">Sign In</a>
+        <%end%>
     </nav>
 
     <%= yield%>

@@ -78,12 +78,6 @@ post '/account_settings' do
         puts "couldn't change password"
         redirect '/account_settings'
     end
-    if params[:delete_account]=="delete"
-        puts "DEEEEEEEEEEEEE"
-        redirect '/'
-    end
-    
-    
 end
 
 get '/all_posts' do
@@ -130,11 +124,6 @@ end
 
 
 #Layout code
-#begin<% if session[:user_id] %>
- #           <a href="/logout">Logout</a>
-  #      <% else %>
-   #         <a href="/sign_up">Sign Up</a>
-    #        <a href="/sign_in">Sign In</a>
-     #   <% end %>
+
 
      
