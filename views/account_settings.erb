@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+</head>
+<body>
+    <% user=User.find(@@user_id)%>
+    <h2>Hello World <%= user.username %> </h2>
+    <img src=<%=user.profile_picture_url %>>
+    <h2>Change password</h2>
+    <form action="/account_settings" method="post">
+        <input type="text" name="password" id="" placeholder="Password">
+        <input type="text" name="confirm_password" id="" placeholder="Password">
+        <input type="submit" value="Change">
+    </form>
+    <h2>Delete Account</h2>
+    <form action="/account_settings" method="post">
+        <input type="radio" name="delete_account" value="delete">Delete Account <br>
+        <input type="submit" value="Confirm">
+    </form>
+</body>
+</html>

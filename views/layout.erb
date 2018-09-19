@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Layout</title>
-  <link rel="stylesheet" href="main.css">
+  
 </head>
+<style>
+a{
+    margin: 10px;
+}
+</style>
 <body>
     <nav>
-        <a href="/">Home</a>
-        <a href="/">Sign In</a>
-        <a href="/">Sign Out</a>
-        <a href="/">Sign Up</a>
+        <a href="/">Home</a> 
+        <a href="/sign_up">Sign Up</a>
+        <a href="/sign_in">Sign In</a>
+        <a href="/account_settings">Account Settings</a>
+        <a href="/all_posts">All Posts</a>
+        <a href="/create_post">Create Post</a>
+        <a href="/users_posts">Profile</a>
+        <a href="/search_by_hashtags">Search By Hashtags</a>
+        <a href="/posts_by_hashtags">Posts By Hashtags</a>  
     </nav>
 
     <%= yield%>
