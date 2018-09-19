@@ -8,8 +8,13 @@
 </head>
 <body>
     <h2>Here are all the posts</h2>
+    <% posts_array=[]%>
+    <% posts.each do |post|%>
+        <% posts_array.push(post)%>
+    <%end%>
+    <% posts_array=posts_array.reverse %>
     <ul>
-        <% posts.each do |post| %>
+        <% posts_array.each do |post| %>
             <li>
                 Title: <%= post.title %><br />
                 Content: <%= post.content %>
