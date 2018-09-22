@@ -4,12 +4,16 @@ require './models'
 enable :sessions
 
 @@user_id=nil
-@@hashtag_string=nil
 
 #Landing Page
 get '/' do
-    erb :index 
+    if session[:user_id]
+        erb :all_posts, locals: {posts: Post.all }
+    else
+        erb :index 
+    end
 end
+
 #Sign up
 get '/sign_up' do
     erb :sign_up
@@ -28,7 +32,6 @@ post '/sign_up' do
             email: params[:email],
             birthday: params[:birthday],
             profile_picture_url: params[:profile_picture_url]
-
         )
         session[:user_id]=user.id
         @@user_id=user.id
@@ -63,30 +66,39 @@ end
 
 #Account Settings
 get '/account_settings' do
-    erb :account_settings
-end
-
-
-
-post '/account_settings' do
-    user=User.find(@@user_id)
-    if params[:password] == params[:confirm_password]
-        user.password=params[:password]
-        user.save
-        redirect '/account_settings'
-    else
-        puts "couldn't change password"
-        redirect '/account_settings'
+    if session[:user_id]
+        erb :account_settings
+    else 
+        redirect '/'
     end
 end
 
-get '/all_posts' do
-
-    erb :all_posts, locals: {posts: Post.all }
+post '/account_settings' do
+    user=User.find(@@user_id)
+    puts params[:password]
+    puts params[:confirm_password]
+    if params[:password] == params[:confirm_password]
+        user.password=params[:password]
+        user.save  
+    else
+        puts "couldn't change password"
+    end
+    redirect '/account_settings'
 end
 
-get '/create_post' do
-    erb :create_post
+post '/delete_account' do
+    user=User.find(@@user_id)
+    user.destroy
+    session[:user_id] = nil
+    redirect '/'
+end
+
+#Create posts and news feed
+get '/all_posts' do
+    output = ''
+    output += erb :create_post
+    output += erb :all_posts, locals: {posts: Post.all }
+    output
 end
 
 post '/create_post' do
@@ -100,30 +112,61 @@ post '/create_post' do
         hashtags: params[:hashtags],
         user_id: @@user_id
     )    
-    redirect '/users_posts'
+    redirect '/all_posts'
 end
 
 get '/users_posts' do
     erb :users_posts
 end
 
+get '/create_trial_post' do
+    erb :create_trial_post
+end
+
+post '/create_trial_post' do
+    puts params[:hashtags]
+
+    post = Post.create(
+        title: params[:title],
+        content: params[:content],
+        hashtags: params[:hashtags],
+        user_id: @@user_id
+    )
+    tags = params[:hashtags].split(" ")
+    for i in tags
+        tag = Tag.find_or_create_by(name: i)
+        Posts_tag.create(
+            post_id: post.id,
+            tag_id: tag.id
+        )
+    end
+    # redirect '/posts_by_hashtags'
+end
+#Hashtags 
+
 get '/search_by_hashtags' do
-    erb :search_by_hashtags
+    output = erb :search_by_hashtags
+    params[:hashtag_to_search]
+    if params[:posts_to_show]
+        output += erb :posts_by_hashtags
+    else
+        output
+    end
 end
 
-post '/search_by_hashtags' do
-    @@hashtag_string=params[:hashtag_to_search]
-    redirect '/posts_by_hashtags'
-end
-
-get '/posts_by_hashtags' do
+post '/posts_by_hashtags' do
+    @posts_to_show=[]
+    hashtag_to_search_array = params[:hashtag_to_search].split(" ")
+    for i in hashtag_to_search_array do
+        tag_id=(Tag.find_by(name: i)).id
+        posts_with_tag=Posts_tag.where(tag_id: tag_id)
+        posts_with_tag.each do |post_id|
+            post=Post.find_by(id: post_id)
+            @posts_to_show.push(post)
+        end
+    end
     erb :posts_by_hashtags
-end
 
+    # redirect "/search_by_hashtags?hashtag_to_search=#{params[:hashtag_to_search]}"
 
-
-
-#Layout code
-
-
-     
+end     

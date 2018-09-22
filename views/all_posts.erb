@@ -7,26 +7,26 @@
     <title>All Posts</title>
 </head>
 <body>
-    <h2>Here are all the posts</h2>
-    <% posts_array=[]%>
-    <% posts.each do |post|%>
-        <% posts_array.push(post)%>
-    <%end%>
-    <% posts_array=posts_array.reverse %>
-    <ul>
-        <% posts_array.each do |post| %>
-            <li>
-                Title: <%= post.title %><br />
-                Content: <%= post.content %>
-                Image: <img src=<%= post.image_url%>>
-                Video: <iframe src=<%= post.video_url%>>
-                width="560" height="315" frameborder="0" 
-                allowfullscreen>
-                </iframe>
-                User: <%=post.user_id%>
-                Hashtags: <%=post.hashtags%>
-            </li>
+    <h2>News Feed</h2>
+    <% posts=posts.reverse %>
+    
+        <% posts.each do |post| %>
+                User: <%=post.user.username.capitalize%> <br />
+                <h2><%= post.title %></h2><br />
+                <hr>
+                <p><%= post.content %> </p><br />
+                <% if post.image_url != ""%>
+                    <img src=<%= post.image_url%>> <br />
+                <% end %>
+                <% if post.video_url != "" %>
+                    <iframe src=<%= post.video_url%>>
+                    width="560" height="315" frameborder="0" 
+                    allowfullscreen>
+                    </iframe> <br />
+                <% end %>
+                <%=post.hashtags%> <br />
+                <hr>
         <% end %>
-    </ul>
+    
 </body>
 </html>
