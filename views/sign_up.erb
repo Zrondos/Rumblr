@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="main.css" type="text/css" rel="stylesheet">
     <title>Sign up</title>
 </head>
 <body>
-    <h1>Sign up</h1>
-    <form action="/sign_up" method="post">
-        <input type="text" name="full_name" id="" placeholder="Full Name">
-        <input type="text" name="username" id="" placeholder="Username">
-        <input type="password" name="password" id="" placeholder="Password">
-        <input type="password" name="confirm_password" id="" placeholder="Password">
-        <input type="email" name="email" id="" placeholder="Email">
-        <input type="date" name="birthday" id="" placeholder="Birthday">
-        <input type="text" name="profile_picture_url" id="" placeholder="Profile Picture URL">
-        <input type="submit" value="Sign up">
+    <div class="sign_up_text">
+    <h1 >SIGN UP</h1>
+    </div>
+    <form class="sign_up_form" action="/sign_up" method="post">
+        <input type="text" name="full_name" id="" placeholder="FULL NAMAE">
+        <input type="text" name="username" id="" placeholder="USERNAME">
+        <input type="password" name="password" id="" placeholder="PASSWORD">
+        <input type="password" name="confirm_password" id="" placeholder="PASSWORD">
+        <input type="email" name="email" id="" placeholder="EMAIL">
+        <input type="date" name="birthday" id="" placeholder="BIRTHDAY">
+        <input type="text" name="profile_picture_url" id="" placeholder="HEADSHOT">
+        <p class="résume_text"> RÉSUMÉ</p> <input class="inline" type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" >
+        <input  class="lets_dance_button" type="submit" value="LET'S DANCE!">
     </form>
 
 </body>

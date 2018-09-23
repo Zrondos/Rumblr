@@ -1,0 +1,223 @@
+/* All */
+body{
+    background-color: #ffff66;
+}
+/*Layout*/
+
+nav {
+    background-color: #ffff66;
+    border-bottom: 5px solid black;
+}
+
+nav a{
+    font-size: 25px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited { 
+    color: black;
+}
+
+.nav_text_signed_in{
+    margin: 0px auto;
+
+    text-align: center;
+}
+
+.nav_text_signed_out{
+    margin-bottom: 10px;
+}
+.nav_text_signed_out a{
+    margin-left: 5px;
+}
+
+.pipe_signed_in{
+    font-size: 25px;
+}
+
+.pipe_signed_out{
+    font-size: 25px;
+}
+
+/* Index.erb */
+
+.title_image{
+    min-width: 100%;
+    position: relative;
+    margin-top: 10px;
+}
+
+.jeté_text{
+    font-size: 100px;
+    position: absolute;
+    left: 47px;
+    top: -17px;
+    z-index: 2;
+}
+
+/* Sign Up and Sign In*/
+.sign_up_text{
+    padding-left: 10px;
+}
+
+.sign_in_text{
+    padding-left: 12px;
+}
+input {
+    display: block;
+    height: 25px;
+    width: 200px;
+    margin: 15px;
+}
+
+.inline{
+    display: inline;
+}
+
+.résume_text{
+    margin-left: 15px;
+    margin-top: -7px;
+    margin-bottom: -5px;
+}
+
+.lets_dance_button{
+    margin-top: -8px;
+    text-align: left;
+    width: 206px;
+}
+
+/* ALL POSTS */
+
+.make_post_container{
+    margin-left: 10px;
+}
+
+.textarea_content{
+    margin-left: 14px;
+}
+.title_text_input{
+    width: 1266px;
+}
+ 
+.all_posts_title{
+    padding-bottom: 5px;
+    border-bottom: 5px solid black;
+}
+
+.post_container{
+    border: 5px solid black;
+}
+
+
+.post_username{
+    margin-left: 80px;
+    margin-top: -15px;
+    margin-bottom: -5px;
+    font-size: 15px;
+}
+
+.profile_pic_thumbnail_container{
+    width: 10px;
+    height: 10px;
+}
+
+.profile_pic_thumbnail{
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.post_title{
+    margin-top: 60px;
+    margin-left: 8px;
+    margin-bottom: -10px;
+}
+
+.post_title h3{
+    font-size: 30px;
+}
+
+hr{
+    background-color: black;
+    border: 1px solid black;
+}
+
+.post_content{
+    margin-left: 10px;
+}
+
+.image_container{
+    margin-left: 10px;
+}
+
+.hashtags{
+    size: 100px;
+    color: black;
+    margin-left: 10px;
+    display: inline;
+}
+
+.hashtag_container{
+    margin-bottom: 10px;
+}
+.hashtags:hover{
+    color: blue;
+}
+
+.video_container{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 500px;
+    width: 1000px;
+
+}
+
+.video{
+    height: 500px;
+    width: 1000px;
+    margin: 0px auto;
+
+}
+
+/*Profile Posts*/
+.your_posts_title{
+    margin-left: 10px;
+}
+
+.profile_info{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/*Account Settings*/
+.profile_picture{
+    margin-left: 10px;
+}
+.welcome_text{
+    margin-left: 10px;
+}
+
+.delete_account{
+    margin-lelft: 10px;
+    margin-top: -5px;
+}
+
+.delete_account_form{
+    margin-top: -25px;
+}
+.delete_radio{
+    display: inline;
+    height: 20px;
+    width: 10px;
+}
+
+.delete_button{
+    margin-top: -10px;
+    display: inline;
+    height: 20px;
+    width: 100px;
+}

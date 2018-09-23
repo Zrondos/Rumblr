@@ -31,7 +31,8 @@ post '/sign_up' do
             password: params[:password],
             email: params[:email],
             birthday: params[:birthday],
-            profile_picture_url: params[:profile_picture_url]
+            profile_picture_url: params[:profile_picture_url],
+            résumé_url: params[:upload]
         )
         session[:user_id]=user.id
         @@user_id=user.id
@@ -64,26 +65,24 @@ get '/logout' do
     redirect '/'
 end
 
-#Account Settings
-get '/account_settings' do
+#Settings
+get '/settings' do
     if session[:user_id]
-        erb :account_settings
+        erb :settings
     else 
-        redirect '/'
+        redirect '/sign_in'
     end
 end
 
-post '/account_settings' do
+post '/settings' do
     user=User.find(@@user_id)
-    puts params[:password]
-    puts params[:confirm_password]
     if params[:password] == params[:confirm_password]
         user.password=params[:password]
         user.save  
     else
         puts "couldn't change password"
     end
-    redirect '/account_settings'
+    redirect '/settings'
 end
 
 post '/delete_account' do
@@ -95,15 +94,14 @@ end
 
 #Create posts and news feed
 get '/all_posts' do
-    output = ''
-    output += erb :create_post
-    output += erb :all_posts, locals: {posts: Post.all }
-    output
+    if session[:user_id]
+        erb :all_posts, locals: {posts: Post.all }
+    else 
+        redirect '/sign_in'
+    end
 end
 
-post '/create_post' do
-    # puts session[:user_id].username
-    # puts User.find(session[:user].id)
+post '/all_posts' do 
     post=Post.create(
         title: params[:title],
         content: params[:content],
@@ -115,20 +113,22 @@ post '/create_post' do
     redirect '/all_posts'
 end
 
-get '/users_posts' do
-    erb :users_posts
+get '/profile' do
+    if session[:user_id]
+        erb :profile
+    else
+        redirect '/sign_in'
+    end
 end
 
-get '/create_trial_post' do
-    erb :create_trial_post
-end
-
-post '/create_trial_post' do
+post '/create_post' do
     puts params[:hashtags]
 
     post = Post.create(
         title: params[:title],
         content: params[:content],
+        image_url: params[:image_url],
+        video_url: params[:video_url],
         hashtags: params[:hashtags],
         user_id: @@user_id
     )
@@ -140,33 +140,65 @@ post '/create_trial_post' do
             tag_id: tag.id
         )
     end
-    # redirect '/posts_by_hashtags'
+    redirect '/all_posts'
 end
 #Hashtags 
 
 get '/search_by_hashtags' do
-    output = erb :search_by_hashtags
-    params[:hashtag_to_search]
-    if params[:posts_to_show]
-        output += erb :posts_by_hashtags
+    if session[:user_id]
+        erb :search_by_hashtags
     else
-        output
+        redirect '/sign_in'
     end
 end
 
 post '/posts_by_hashtags' do
-    @posts_to_show=[]
+    
+    posts_to_show=[]
+    puts params[:hashtag_to_search].class
     hashtag_to_search_array = params[:hashtag_to_search].split(" ")
+    puts hashtag_to_search_array[0]
+    puts 
+    puts (hashtag_to_search_array).class
+    puts "Hashtag_to_search_array !!!!!!!!!!!!" 
+    puts hashtag_to_search_array.to_s
     for i in hashtag_to_search_array do
         tag_id=(Tag.find_by(name: i)).id
+        puts "tag_id !!!!!!!!!!!!!!!!!!!!!!!!!!"
+        puts tag_id
         posts_with_tag=Posts_tag.where(tag_id: tag_id)
-        posts_with_tag.each do |post_id|
-            post=Post.find_by(id: post_id)
-            @posts_to_show.push(post)
+        for post in posts_with_tag do
+            post_to_add=Post.where(id: post.post_id)
+            puts "!!!!!!!!!!!!!! post_to_add"
+            puts post_to_add
+            posts_to_show.push(post_to_add)
         end
+        puts "posts_with_tag!!!!!!!!!!!!!!!!!!!!"
+        puts posts_with_tag
+
+        puts "posts_to_show full array !!!!!!!!!!!!!"
+        puts posts_to_show
     end
-    erb :posts_by_hashtags
-
-    # redirect "/search_by_hashtags?hashtag_to_search=#{params[:hashtag_to_search]}"
-
+    redirect '/posts_by_hashtags'
 end     
+
+get "/posts_by_hashtags" do
+    erb :posts_by_hashtags
+end
+
+# <% for post in posts_to_show %>
+#                 <ul>
+#                     <li>
+#                         Title: <%= post.title %><br />
+#                         Content: <%= post.content %><br />
+#                         Hashtag: <%= post.hashtags%>
+#                         Image: <img src=<%= post.image_url %>><br />
+#                         # Video: <iframe src=<%= post.video_url %>>
+#                         # width="560" height="315" frameborder="0" 
+#                         # allowfullscreen>
+#                         # </iframe><br />
+#                         <hr>
+#                     </li>
+#                 </ul>
+#             <% end %>
+#     <% end %>

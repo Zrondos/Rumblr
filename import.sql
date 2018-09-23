@@ -10,7 +10,8 @@ CREATE TABLE users (
     password VARCHAR(50),
     email VARCHAR(50),
     birthday TIMESTAMP,
-    profile_picture_url TEXT
+    profile_picture_url TEXT,
+    résumé_url TEXT
 
 );
 

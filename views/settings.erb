@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile</title>
+    <title>Settings</title>
 </head>
 <body>
     <% user=User.find(@@user_id)%>
-    <h2>Hello World <%= user.username %> </h2>
+    <div class="welcome_text">
+    <h2>Welcome <%= user.username %>!</h2>
+    </div>
+    <div class="profile_picture">
     <img src=<%=user.profile_picture_url %>>
+    </div>
+    <div class="change_password">
     <h2>Change password</h2>
-    <form action="/account_settings" method="post">
+    <form action="/settings" method="post">
         <input type="text" name="password" id="" placeholder="Password">
         <input type="text" name="confirm_password" id="" placeholder="Password">
         <input type="submit" value="Change">
     </form>
+    </div>
+    <div class="delete_account">
     <h2>Delete Account</h2>
-    <form action="/delete_account" method="post">
-        <input type="radio" name="delete_account" value="delete">Delete Account <br>
-        <input type="submit" value="Confirm">
+    <form class="delete_account_form" action="/delete_account" method="post">
+        <input class="delete_radio"type="radio" name="delete_account" value="delete">Delete Account <br>
+        <input class="delete_button" type="submit" value="Confirm">
     </form>
+    </div>
 </body>
 </html>
