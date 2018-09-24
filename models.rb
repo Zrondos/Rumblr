@@ -1,7 +1,13 @@
 require 'sinatra/activerecord'
 require 'pg'
 
-set :database, 'postgresql:rumblr_database'
+configure :development do
+    set :database, 'postgresql:rumblr_database'
+end
+
+configure :production do
+    set :database, ENV["DATABASE_URL"]
+  end
 
 class User < ActiveRecord::Base
     has_many :posts, dependent: :destroy
@@ -22,4 +28,5 @@ class Posts_tag < ActiveRecord::Base
     belongs_to :tag
     belongs_to :post
 end
+
 
