@@ -49,7 +49,6 @@ end
 
 post '/sign_in' do 
     user = User.find_by(username: params[:username])
-    puts params[:password] == user.password
     if user && user.password == params[:password]
         session[:user_id] = user.id
         @@user_id=user.id
