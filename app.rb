@@ -51,7 +51,7 @@ post '/sign_in' do
     user = User.find_by(username: params[:username])
     if user && user.password == params[:password]
         session[:user_id] = user.id
-        @@user_id=user.id
+        @@user_id = user.id
         # flash[:info] = 'You have been signed in'
         redirect '/all_posts'
     else
