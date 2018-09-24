@@ -22,6 +22,9 @@ CREATE TABLE posts (
     image_url TEXT,
     video_url TEXT,
     hashtags TEXT,
+    location TEXT,
+    studio TEXT,
+    style TEXT,
     user_id integer
 );
 

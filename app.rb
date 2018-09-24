@@ -1,9 +1,12 @@
 require 'sinatra'
 require 'sinatra/flash'
 require './models'
+require 'sinatra/activerecord'
 enable :sessions
 
 @@user_id=nil
+@@posts_to_show=[]
+
 
 #Landing Page
 get '/' do
@@ -102,14 +105,17 @@ get '/all_posts' do
 end
 
 post '/all_posts' do 
-    post=Post.create(
+    post = Post.create(
         title: params[:title],
         content: params[:content],
         image_url: params[:image_url],
         video_url: params[:video_url],
         hashtags: params[:hashtags],
+        location: params[:location],
+        studio: params[:studio],
+        style: params[:style],
         user_id: @@user_id
-    )    
+    )
     redirect '/all_posts'
 end
 
@@ -130,6 +136,9 @@ post '/create_post' do
         image_url: params[:image_url],
         video_url: params[:video_url],
         hashtags: params[:hashtags],
+        location: params[:location],
+        studio: params[:studio],
+        style: params[:style],
         user_id: @@user_id
     )
     tags = params[:hashtags].split(" ")
@@ -154,51 +163,49 @@ end
 
 post '/posts_by_hashtags' do
     
-    posts_to_show=[]
-    puts params[:hashtag_to_search].class
     hashtag_to_search_array = params[:hashtag_to_search].split(" ")
-    puts hashtag_to_search_array[0]
-    puts 
-    puts (hashtag_to_search_array).class
-    puts "Hashtag_to_search_array !!!!!!!!!!!!" 
-    puts hashtag_to_search_array.to_s
     for i in hashtag_to_search_array do
         tag_id=(Tag.find_by(name: i)).id
-        puts "tag_id !!!!!!!!!!!!!!!!!!!!!!!!!!"
-        puts tag_id
-        posts_with_tag=Posts_tag.where(tag_id: tag_id)
+        posts_with_tag=Posts_tag.where(tag_id: tag_id).all
         for post in posts_with_tag do
-            post_to_add=Post.where(id: post.post_id)
-            puts "!!!!!!!!!!!!!! post_to_add"
-            puts post_to_add
-            posts_to_show.push(post_to_add)
+            post_to_add=Post.find(post.post_id)
+            @@posts_to_show.push(post_to_add)
         end
-        puts "posts_with_tag!!!!!!!!!!!!!!!!!!!!"
-        puts posts_with_tag
-
-        puts "posts_to_show full array !!!!!!!!!!!!!"
-        puts posts_to_show
     end
     redirect '/posts_by_hashtags'
-end     
+end    
+
+post '/search_locations' do
+    location=params[:location]
+    posts=Post.where(location: location).all
+    for post in posts do
+        @@posts_to_show.push(post)
+    end
+    redirect '/posts_by_hashtags'
+end
+
+post '/search_studios' do
+    studio=params[:studio]
+    posts=Post.where(studio: studio).all
+    for post in posts do
+        @@posts_to_show.push(post)
+    end
+    redirect '/posts_by_hashtags'
+end
+
+post '/search_style' do
+    style=params[:style]
+    posts=Post.where(style: style).all
+    for post in posts do
+        @@posts_to_show.push(post)
+    end
+    redirect '/posts_by_hashtags'
+end
 
 get "/posts_by_hashtags" do
     erb :posts_by_hashtags
 end
 
-# <% for post in posts_to_show %>
-#                 <ul>
-#                     <li>
-#                         Title: <%= post.title %><br />
-#                         Content: <%= post.content %><br />
-#                         Hashtag: <%= post.hashtags%>
-#                         Image: <img src=<%= post.image_url %>><br />
-#                         # Video: <iframe src=<%= post.video_url %>>
-#                         # width="560" height="315" frameborder="0" 
-#                         # allowfullscreen>
-#                         # </iframe><br />
-#                         <hr>
-#                     </li>
-#                 </ul>
-#             <% end %>
-#     <% end %>
+get "/gallery" do
+    erb :gallery
+end

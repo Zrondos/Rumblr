@@ -7,9 +7,25 @@
     <title>Document</title>
 </head>
 <body>
+    <h2>SEARCH</h2>
+    <div class="search_buttons">
     <form action="/posts_by_hashtags" method="post">
-        <input type="text" name="hashtag_to_search" id="" placeholder="hash_tags">
+        <input type="text" name="hashtag_to_search" id="" placeholder="HASHTAGS">
         <input type="submit" value="Search">
     </form>
+    <form action="/search_locations" method="post">
+        <input type="text" name="location" id="" placeholder="LOCATIONS">
+        <input type="submit" value="Search">
+    </form>
+    <form action="/search_studios" method="post">
+        <input type="text" name="studio" id="" placeholder="STUDIOS">
+        <input type="submit" value="Search">
+    </form>
+    <form action="/search_style" method="post">
+        <input type="text" name="style" id="" placeholder="STYLE">
+        <input type="submit" value="Search">
+    </form>
+    </div>
+    <img class="search_image" src="dance4.jpg">
 </body>
 </html>

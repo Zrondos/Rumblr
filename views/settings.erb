@@ -11,8 +11,8 @@
     <div class="welcome_text">
     <h2>Welcome <%= user.username %>!</h2>
     </div>
-    <div class="profile_picture">
-    <img src=<%=user.profile_picture_url %>>
+    <div class="profile_picture_container">
+    <img class="profile_picture" src=<%=user.profile_picture_url %>>
     </div>
     <div class="change_password">
     <h2>Change password</h2>
@@ -25,7 +25,7 @@
     <div class="delete_account">
     <h2>Delete Account</h2>
     <form class="delete_account_form" action="/delete_account" method="post">
-        <input class="delete_radio"type="radio" name="delete_account" value="delete">Delete Account <br>
+        <input class="delete_radio"type="radio" name="delete_account" value="delete"><div class="delete_text">Delete Account</div><br>
         <input class="delete_button" type="submit" value="Confirm">
     </form>
     </div>
