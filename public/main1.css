@@ -158,7 +158,6 @@ textarea{
     background-color: white;
 }
 
-
 .post_username{
     margin-left: 80px;
     margin-top: -15px;
@@ -227,14 +226,12 @@ hr{
     margin-left: 10px;
     height: 500px;
     width: 1000px;
-
 }
 
 .video{
     height: 500px;
     width: 1000px;
     margin: 0px auto;
-
 }
 
 /*Profile Posts*/
@@ -251,81 +248,27 @@ hr{
 .profile_picture{
     margin-left: 10px;
 }
-.welcome_text{
+
+.welcome_text h2{
     margin-left: 10px;
 }
 
 .delete_account h2{
-    margin-bottom: -85px;
-}
-.delete_account_form input{
-    display: inline-block;
-}
-
-/*.delete_radio{
-    width: 15px;
-    margin-bottom: -10px;
-}*Account Settings*/
-.profile_picture{
-    margin-left: 10px;
-}
-.welcome_text{
-    margin-left: 10px;
-}
-
-.delete_account h2{
-    margin-bottom: -85px;
-}
-.delete_account_form input{
-    display: inline-block;
-}
-
-/*.delete_radio{
-    width: 15px;
-    margin-bottom: -10px;
-}*Account Settings*/
-.profile_picture{
-    margin-left: 10px;
-}
-.welcome_text{
-    margin-left: 10px;
-}
-
-.delete_account h2{
-    margin-bottom: -85px;
-}
-.delete_account_form input{
-    display: inline-block;
-}
-
-/*.delete_radio{
-    width: 15px;
-    margin-bottom: -10px;
-}*Account Settings*/
-.profile_picture{
-    margin-left: 10px;
-}
-.welcome_text{
-    margin-left: 10px;
-}
-
-.delete_account h2{
-    margin-bottom: -85px;
-}
-.delete_account_form input{
-    display: inline-block;
-}
-
-/*.delete_radio{
-    width: 15px;
     margin-bottom: -10px;
 }
 
-.delete_text{
+.delete_account_form input {
     display: inline-block;
-    font-size: 15px;
-    margin-top: 100px;
-} */
+}
+
+.delete_radio{
+    width: 13px;
+    height: 18px;
+}
+
+.delete_button{
+    width: 100px;
+}
 
 /*Search Posts*/
 .search_buttons{

@@ -35,7 +35,6 @@ post '/sign_up' do
             email: params[:email],
             birthday: params[:birthday],
             profile_picture_url: params[:profile_picture_url],
-            résumé_url: params[:upload]
         )
         session[:user_id]=user.id
         @@user_id=user.id
