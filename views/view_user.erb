@@ -1,0 +1,6 @@
+<h2>List of Users</h2>
+<% users=User.all%>
+<% users.each do |user| %>
+    <a href=""><%=user.username %></a>
+    <img src=<%= user.profile_picture_url%>>
+<%end %>

@@ -1,0 +1,72 @@
+
+    <div class="profile_info">
+        <% user=User.find(@@user_id)%>
+        <h2><%= user.full_name %></h2>
+            <div class="profile_picture_container">
+                <img src=<%=user.profile_picture_url %>>
+            </div>
+    </div>
+
+    <div class="make_post_container">
+        <h2>MAKE POST</h2>
+    
+        <form action="/create_post" method="post">
+            <input class="title_text_input" rows="1" cols="230"type="text" name="title" id="" placeholder="TITLE"></textarea>
+            <textarea class="textarea_content" rows="5" cols="230" name="content" id="" placeholder="CONTENT"></textarea>
+            <input type="text" name="image_url" id="" placeholder="IMAGE">
+            <input type="text" name="video_url" id="" placeholder="VIDEO">
+            <input type="text" name="hashtags" id="" placeholder="HASHTAGS">
+            <input type="text" name="location" id="" placeholder="LOCATION">
+            <input type="text" name="studio" id="" placeholder="STUDIO">
+            <input type="text" name="style" id="" placeholder="STYLE">
+            <input class="lets_dance_button" type="submit" value="POST!">
+        </form>
+    </div>
+    <h2 class="your_posts_title">YOUR POSTS</h2>
+
+    <%user_posts=Post.where(user_id: @@user_id)%>
+    <%user_posts=user_posts.reverse%>
+    <% user_posts.each do |post| %>
+        <div class="post_container">
+            <div class="profile_pic_thumbnail_container">
+                <img class="profile_pic_thumbnail" src=<%=post.user.profile_picture_url%>>
+            </div>
+            <div class="post_username">
+                <h3><%=post.user.username.capitalize%></h3> 
+            </div>
+            <div class="post_title">
+                <h3><%= post.title %></h3>
+            </div>
+
+            <hr size="3">
+
+            <div class="post_content">
+                <p><%= post.content %> </p><br />
+            </div>
+
+            <% if post.image_url != ""%>
+                <div class="image_container">
+                    <img src=<%= post.image_url%>> <br />
+                </div>
+            <% end %>
+
+            <% if post.video_url != "" %>
+                <div class="video_container">
+                    <video width="320" height="240" controls>
+                        <source src="<%= post.video_url %>" type="video/mp4">
+                    </video>
+                    <iframe class="video" src=<%= post.video_url%>>
+                    width="560" height="315" frameborder="0" 
+                    allowfullscreen>
+                    </iframe> <br />
+                </div>
+            <% end %>
+
+            <div class="hashtag_container">
+                <%individual_hashtags=post.hashtags.split(" ")%>
+                <%individual_hashtags.each do |hashtag|%>
+                    <span class="hashtags"> <%= hashtag %></span> <br />
+                <% end %>
+            </div>
+        </div>
+    <% end %>

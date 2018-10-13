@@ -207,3 +207,18 @@ end
 get "/gallery" do
     erb :gallery
 end
+
+get "/view_user" do
+    erb :view_user
+end
+
+get "/user/:id" do
+    # puts params[id]
+    # posts_to_post=Post.where(user_id: params[:id])
+    if session[:user_id]
+        erb :users_posts
+    else
+        redirect '/sign_in'
+    end
+
+end
