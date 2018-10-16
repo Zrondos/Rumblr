@@ -1,7 +1,7 @@
 
     <div class='links'>
         <% users.each do |user| %>
-            <a href="/user/<%=user.id%>">TEST</a><br>
+            <a href="/user/<%=user.id%>"><%=user.full_name%></a><br>
         <% end %>
     </div>
     
