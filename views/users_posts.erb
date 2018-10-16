@@ -1,6 +1,5 @@
 
     <div class="profile_info">
-        <% user=User.find(@@user_id)%>
         <h2><%= user.full_name %></h2>
             <div class="profile_picture_container">
                 <img src=<%=user.profile_picture_url %>>
@@ -24,7 +23,7 @@
     </div>
     <h2 class="your_posts_title">YOUR POSTS</h2>
 
-    <%user_posts=Post.where(user_id: @user_to_show)%>
+    <%user_posts=Post.where(user_id: user.id)%>
     <%user_posts=user_posts.reverse%>
 
     <% user_posts.each do |post| %>
