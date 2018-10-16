@@ -24,8 +24,9 @@
     </div>
     <h2 class="your_posts_title">YOUR POSTS</h2>
 
-    <%user_posts=Post.where(user_id: @@user_id)%>
+    <%user_posts=Post.where(user_id: @user_to_show)%>
     <%user_posts=user_posts.reverse%>
+
     <% user_posts.each do |post| %>
         <div class="post_container">
             <div class="profile_pic_thumbnail_container">

@@ -96,7 +96,7 @@ end
 #Create posts and news feed
 get '/all_posts' do
     if session[:user_id]
-        erb :all_posts, locals: {posts: Post.all }
+        erb :all_posts, locals: {posts: Post.all, users: User.all}
     else 
         redirect '/sign_in'
     end
@@ -216,9 +216,9 @@ get "/user/:id" do
     # puts params[id]
     # posts_to_post=Post.where(user_id: params[:id])
     if session[:user_id]
+        @user_to_show=params[:id]
         erb :users_posts
     else
         redirect '/sign_in'
     end
-
 end

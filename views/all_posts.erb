@@ -1,4 +1,10 @@
 
+    <div class='links'>
+        <% users.each do |user| %>
+            <a href="/user/<%=user.id%>">TEST</a><br>
+        <% end %>
+    </div>
+    
     <div class="make_post_container">
     <h2> MAKE POST </h2>
     <form action = "/create_post" method="post">
@@ -54,4 +60,3 @@
                 </div>
                 </div>
         <% end %>
-    
